@@ -1,0 +1,64 @@
+﻿@model MathModel
+@{
+    var s = "";
+}
+
+@using(var form = Html.BeginForm())
+{
+    <div class="container">
+        <div class="row mt-2">
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.num1)
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.num1)
+                @Html.ValidationMessageFor(m => m.num1)
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.num2)
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.num2)
+                @Html.ValidationMessageFor(m => m.num2)
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.ops) 
+            </div>
+            <div class="col-md-9">
+                @Html.DropDownListFor(m => m.ops, new List<SelectListItem>
+                {
+                    new SelectListItem{Text = "Select Operation", Value = "0"},
+                    new SelectListItem{Text = "Sum", Value = "+"},
+                    new SelectListItem{Text = "Difference", Value = "-"},
+                    new SelectListItem{Text = "Product", Value = "*"},
+                    new SelectListItem{Text = "Divide", Value = "/"},
+                })
+                @Html.ValidationMessageFor(m => m.ops)
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-9">
+                <input type="submit" value="Calculate" />
+            </div>
+        </div>
+    </div>
+}
+ <div class="row mt-2">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-9">
+        @if(@Model.num1>0 && @Model.num2 > 0 && Model.ops != "0")
+        {
+            s = @Model.num1.ToString() +  " " + @Model.ops + " " + @Model.num2.ToString() + " = " + @Model.Calculate().ToString();
+        }
+        @s
+            </div>
+</div>
